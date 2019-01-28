@@ -1,6 +1,6 @@
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { UsersService } from 'src/app/shared/services/users.service';
 import { User } from 'src/app/shared/models/user.model';
@@ -20,10 +20,13 @@ export class LoginComponent implements OnInit {
   constructor(
     private userService: UsersService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+
+
     this.message = new Message('danger', '');
     this.form = new FormGroup({
       'email': new FormControl(null, [Validators.required, Validators.email]),

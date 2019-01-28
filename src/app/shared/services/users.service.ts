@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { pipe } from '@angular/core/src/render3';
 
 @Injectable()
 export class UsersService {
@@ -16,5 +17,9 @@ export class UsersService {
         .pipe(
             map((user: User[]) => user[0] ? user[0] : undefined)
         );
+    }
+
+    createNewUser(user: User): Observable<any> {
+        return this.http.post('http://localhost:3000/users', user);
     }
 }
