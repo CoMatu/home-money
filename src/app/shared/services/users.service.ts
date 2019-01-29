@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { pipe } from '@angular/core/src/render3';
 
 @Injectable()
 export class UsersService {
