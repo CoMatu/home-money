@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { BillService } from '../shared/services/bill.service';
-import { combineLatest, Subscription, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { combineLatest, Subscription } from 'rxjs';
 import { Bill } from '../shared/models/bill.model';
 
 @Component({
@@ -30,7 +29,7 @@ export class BillPageComponent implements OnInit, OnDestroy {
       this.bill = data[0];
       this.currency = data[1];
       this.isLoaded = true;
-      console.log(data);
+//      console.log(data);
     });
   }
 
@@ -45,7 +44,9 @@ export class BillPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sub1.unsubscribe();
-    this.sub2.unsubscribe();
+    if (this.sub2) {
+      this.sub2.unsubscribe();
+    }
   }
 
 }
