@@ -36,6 +36,11 @@
       "name": "home",
       "capacity": 10000,
       "id": 5
+    },
+    {
+      "name": "Новая",
+      "capacity": 100,
+      "id": 6
     }
   ],
   "events": [
