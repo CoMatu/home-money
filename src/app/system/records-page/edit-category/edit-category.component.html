@@ -5,12 +5,20 @@
     </div>
   </div>
   <div class="card-block">
+    <div class="alert alert-{{ message.type }}"
+    *ngIf="message.text"
+    >
+      {{ message.text }}
+    </div>
     <form #f="ngForm" (ngSubmit)="onSubmit(f)">
       <div class="form-group">
           <label class="control-label" for="e-select-category">Выберите категорию</label>
         <select 
         class="form-control"
         id="e-select-category"
+        [(ngModel)]="currentCategoryId"
+        (change)="onCategoryChange()"
+        [ngModelOptions]="{standalone: true}"
         >
           <option 
           *ngFor="let c of categories"
@@ -30,7 +38,7 @@
         required
         #name="ngModel"
         name="name"
-        ngModel
+        [ngModel]="currentCategory.name"
         >
         <span 
         *ngIf="name.invalid && name.touched"
@@ -47,7 +55,7 @@
         type="number" 
         id="e-category-value" 
         class="form-control"
-        [ngModel]="1"
+        [ngModel]="currentCategory.capacity"
         name="capacity"
         #capacity="ngModel"
         required
@@ -60,7 +68,11 @@
         Поле не может быть пустым.
       </span>
       </div>
-      <button type="submit" class="btn btn-primary">Добавить</button>
+      <button 
+      type="submit" 
+      class="btn btn-primary"
+      [disabled]="f.invalid"
+      >Редактировать</button>
     </form>
   </div>
 </div>
