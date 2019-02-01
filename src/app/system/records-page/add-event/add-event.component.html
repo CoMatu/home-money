@@ -75,13 +75,12 @@
       >
         <label class="control-label" for="description">Введите описание</label>
         <input 
-        type="number" 
-        value="0" 
+        type="text" 
+        value="" 
         id="description" 
         class="form-control"
         name="description"
-        [ngModel]="1"
-        min=''
+        ngModel
         #description="ngModel"
         required
         >

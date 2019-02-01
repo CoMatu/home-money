@@ -8,7 +8,7 @@
     }
   ],
   "bill": {
-    "value": 101200,
+    "value": 98800,
     "currency": "RUB"
   },
   "categories": [
@@ -26,21 +26,6 @@
       "id": 3,
       "name": "Машина",
       "capacity": 7000
-    },
-    {
-      "name": "new",
-      "capacity": 1,
-      "id": 4
-    },
-    {
-      "name": "home",
-      "capacity": 10000,
-      "id": 5
-    },
-    {
-      "name": "Новая1",
-      "capacity": 10033,
-      "id": 6
     }
   ],
   "events": [
@@ -85,10 +70,11 @@
       "description": "Заправка + проход ТО"
     },
     {
-      "type": "income",
+      "type": "outcome",
       "amount": 1200,
       "category": 3,
-      "data": "01.02.2019 16:16:16",
+      "data": "01.02.2019 19:03:12",
+      "description": "dewr",
       "id": 6
     }
   ]
