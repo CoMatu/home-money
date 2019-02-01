@@ -8,6 +8,7 @@ import { EventsService } from '../../shared/services/events.service';
 import { BillService } from '../../shared/services/bill.service';
 import { Bill } from '../../shared/models/bill.model';
 import { mergeMap } from 'rxjs/operators';
+import { Message } from 'src/app/shared/models/message.model';
 
 @Component({
   selector: 'app-add-event',
@@ -22,12 +23,20 @@ export class AddEventComponent implements OnInit {
     {type: 'outcome', label: 'Расход'}
   ];
 
+  message: Message;
+
   constructor(
     private eventsService: EventsService,
     private billService: BillService
     ) { }
 
   ngOnInit() {
+    this.message = new Message('danger', '');
+  }
+
+  private showMessage(text: string) {
+    this.message.text = text;
+    window.setTimeout(() => this.message.text = '', 5000);
   }
 
   onSubmit(form: NgForm) {
@@ -39,12 +48,14 @@ export class AddEventComponent implements OnInit {
     const event = new AppEvent(type, amount, +category,
     moment().format('DD.MM.YYYY HH:mm:ss'), description);
 
+    console.log(event);
+
     this.billService.getBill()
     .subscribe((bill: Bill) => {
       let value = 0;
-      if (type === 'outcome') {
+      if (type === 'outcome') { 
         if (amount > bill.value) {
-          // error
+          this.showMessage(`На счету недостаточно средств. Вам не хватает ${amount - bill.value}`);
           return;
         } else {
           value = bill.value - amount;
