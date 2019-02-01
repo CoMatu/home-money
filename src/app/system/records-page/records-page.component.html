@@ -10,13 +10,18 @@
 <section class="section" *ngIf="isLoaded">
   <div class="row">
     <div class="col-md-6">
-      <app-add-event></app-add-event>
+      <app-add-event
+      [categories]="categories"
+      ></app-add-event>
     </div>
     <div class="col-md-6">
       <app-add-category (categoryAdd)="newCategoryAdded($event)"></app-add-category>
     </div>
     <div class="col-md-6">
-      <app-edit-category [categories]="categories"></app-edit-category>
+      <app-edit-category 
+      [categories]="categories"
+      (categoryEdit)="categoryWasEdited($event)"
+      ></app-edit-category>
     </div>
   </div>
 </section>
