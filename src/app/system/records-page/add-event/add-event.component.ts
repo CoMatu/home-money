@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import * as moment from 'moment';
 
 import { Category } from '../../shared/models/category.model';
+import { AppEvent } from '../../shared/models/event.model';
 
 @Component({
   selector: 'app-add-event',
@@ -22,7 +24,13 @@ export class AddEventComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    let {amount, description, category, type} = form.value;
+    if (amount < 0) {
+      amount *= -1;
+    }
 
+    const event = new AppEvent(type, amount, +category,
+    moment().format('DD.MM.YYYY HH:mm:ss'), description);
   }
 
 }
