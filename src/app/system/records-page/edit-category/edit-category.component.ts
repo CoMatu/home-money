@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { Category } from '../../shared/models/category.model';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { CategoriesService } from '../../shared/services/categories.service';
 import { Message } from 'src/app/shared/models/message.model';
 
@@ -11,7 +11,9 @@ import { Message } from 'src/app/shared/models/message.model';
   templateUrl: './edit-category.component.html',
   styleUrls: ['./edit-category.component.scss']
 })
-export class EditCategoryComponent implements OnInit {
+export class EditCategoryComponent implements OnInit, OnDestroy {
+
+  sub1: Subscription;
 
   @Input() categories: Category[] = [];
   @Output() categoryEdit = new EventEmitter<Category>();
@@ -33,18 +35,24 @@ export class EditCategoryComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    // tslint:disable-next-line:prefer-const
     let {capacity, name} = form.value;
     if (capacity < 0) { capacity *= -1; }
 
     const category = new Category(name, capacity, +this.currentCategoryId);
 
-    this.categoriesService.updateCategory(category)
+    this.sub1 = this.categoriesService.updateCategory(category)
+    // tslint:disable-next-line:no-shadowed-variable
     .subscribe((category: Category) => {
       this.categoryEdit.emit(category);
       this.message.text = 'Категория успешно отредактирована.';
       window.setTimeout(() => this.message.text = '', 5000);
 
     });
+  }
+
+  ngOnDestroy() {
+    if (this.sub1) {this.sub1.unsubscribe(); }
   }
 
 }
