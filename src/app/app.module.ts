@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { UsersService } from './shared/services/users.service';
 import { AuthService } from './shared/services/auth.service';
 import { SystemModule } from './system/system.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { SystemModule } from './system/system.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AuthModule,
     AppRoutingModule,
